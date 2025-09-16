@@ -1,0 +1,78 @@
+Pre-requisite
+=============
+-Basic Javascript
+
+
+Softwares
+=========
+1. VS Code (Editor) (Atom , SublimeText, notepadd++)
+   https://code.visualstudio.com/download
+
+2. NodeJS
+   https://nodejs.org/en/download/
+
+
+Emmets/Shortcuts
+================
+https://docs.emmet.io/cheat-sheet/
+
+
+
+NodeJS
+======
+NodeJS  - FrontEnd Development - Runtime Environment (NodeJS as a software)
+NodeJS  - BackEnd Development - Programming Language - Modules/packages ( fs,os,http,crypto )
+
+
+How to execute Javascript Files
+===============================
+1. Browser
+    -Create a Javascript file , add javascript code/content (addition.js)
+    -Include that javascript file in an HTML file (addition.html)
+     <script src='addition.js'></script>
+    -Open HTML File in Browser
+      a. add 'open in browser' extension in vscode
+      b. alt + b   (OR)  alt + shift + b
+
+2. NodeJS
+    -Create a Javascript file , add javascript code/content (addition.js)
+    -Run that javascript file in nodejs, run the below command
+      node <filename>.js (make sure nodejs is installed)
+
+Note : Every Javascript file that runs on browser may not work in nodeJS
+       Every Javascript file that runs on Nodejs may not work in browser
+
+Objects Available both in browser & nodejs : console , Math, Array , String
+Objects Available only in browser,not in nodejs : window , document 
+Objects Available only in nodejs,not in browser : os, fs, http, url 
+
+
+
+            Browser                             NodeJS
+====================================================================         
+1. DOM(document) - yes                  1. DOM(document) - No
+2. window - yes                         2. window - No
+3. cookie - yes                         3. cookie - No
+4. offline storage - yes                4. offline storage - No
+5. FileSystem - No                      5. FileSystem - yes
+6. Database Interaction - No            6. Database Interaction - yes
+7. Client App / FrontEnd/ UI            7. Server App / BackEnd
+8. Consumes APIs                        8. Develops APIs
+
+
+NodeJS : Develop APIs , fetch the live data from database & returns that tdata to client/FrontEnd
+FrontEnd : Consumes the APIs, collects the data from NodeJS and displays on the screen.
+
+
+
+Javascript Engine
+==================
+-It executes Javascript Code
+-Javascript Engine is available in every browser  + NodeJS
+
+different javascript engines:
+Chrome : v8
+firefox : spidermonkey
+IE : chakra
+safari : JavaScriptCore
+NodeJS : v8
