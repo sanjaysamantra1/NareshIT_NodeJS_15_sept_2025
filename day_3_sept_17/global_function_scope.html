@@ -1,0 +1,26 @@
+<script>
+    var a = 10;   // global : window (can be accessed outside of this script also)
+    let b = 20;   // global : window(no) (script)
+    const c = 30; // global : window(no) (script)
+    console.log(window.a, globalThis.a); // yes
+    console.log(window.b, window.c,); // no
+    console.log(globalThis.b, globalThis.c,); // no
+
+    function f1() {
+        console.log('f1 starts here...')
+        var d = 40;
+        e = 50; // global
+        console.log(`a:${a} , b:${b}, c:${c} d:${d} e:${e}`);
+        console.log('f1 ends here...')
+    }
+    function f2() {
+        console.log('f2 starts here...')
+        console.log(`a:${a} , b:${b}, c:${c} e:${e}`);
+        // console.log(d); // No
+        console.log('f2 ends here...')
+    }
+    f1();
+    f2();
+
+    // Note: variables declared without var/let/const , are global scoped, no matter where they are declared
+</script>

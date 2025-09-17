@@ -1,0 +1,43 @@
+Javascript : Programming Language , it follows ECMAScript standards
+ECMAScript : Standards ( Set of rules and regulations )
+ECMA : European Computer menufecturer Association
+
+
+2011  ES_5
+2015  ES_6 (const,let,class,extends,for-in,for-of, rest , spread)
+2016  ES_7
+2017  ES_8
+2018  ES_9
+2019  ES_10
+2020  ES_11
+2021  ES_12
+2022  ES_13
+2023  ES_14
+2024  ES_15
+2025  ES_16
+
+
+Variables
+==========
+-Variables can be declared by using the below 3 keywords:
+    1. var
+    2. let
+    3. const
+
+
+        var                      let                        const 
+========================================================================
+1. Since begining           1. ECMAScript-6              1. ECMAScript-6  
+2. value can be changed     2. value can be changed      2. value cann't be changed
+3. initialization-not       3. initialization - not      3. initialization-mandatory
+   mandatory
+4. can be re-declared       4. cann't be re-declared     4. cann't be re-declared
+5. function/global          5. block/function/global     5. block/function/global
+
+
+
+Variable Scopes:
+================
+1. global/script : declared outside functions & accessible anywhere in the script
+2. function : declared inside a function and accessible anywhere in the function
+3. block : declared inside a block and accessible anywhere in the block
