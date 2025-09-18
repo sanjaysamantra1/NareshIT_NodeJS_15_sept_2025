@@ -1,0 +1,23 @@
+How Javascript Works
+====================
+-When any javascript code gets executed, N Execution contexts are created
+-Execution context is the environment within which current code is being executed
+
+-1 global Execution context is created for global code Execution
+-For Each Function call 1 execution context is created
+
+-Each execution context has 2 phases
+    1. Memory Creation (variables & function are added to memory , 'undefined' gets assigned )
+    2. Code Execution (Code gets executed - actual value assignment, methods are invoked)
+
+
+
+Event loop
+==========
+Heap  : Area to store variables 
+callStack : stack of functions , the top 1 gets executed
+            functions which are ready for execution 
+microtask :  callback function(promise, intersectionobserver)
+TaskQueue :  callback function ( settimeout , setinterval , DOM)
+EventLoop : checks callStack & callback queue, brings function from callback queue adds
+            to callstack for execution
