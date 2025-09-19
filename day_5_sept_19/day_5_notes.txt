@@ -1,0 +1,36 @@
+Function
+========
+-Block of code which performs a specific task.
+
+1. Pre-Defined : console.log(),Math.max(), Math.min()
+2. User-Defined : we have to write function logic & invoke them
+    a. Function Declaration
+    b. Function Expression
+    c. Arrow Function (ES_6) 2015
+
+Function Declaration vs Function Expression
+============================================
+1. Function declarations are named , function expressions are anonymous
+2. Function declarations are hoisted , function expressions are not hoisted
+
+
+Arrow Function (ES_6) 2015
+==============
+-Shorter in syntax
+-implicit return
+-good to be used as callbacks
+-doesnt have its own 'this' value , Lexical 'this'
+-'this' value is static
+
+
+Arrow function Limitations
+===========================
+-cannot be used as constructor
+-Shouldn't be used as object methods
+-Shouldn't be used when 'this' should be dynamic
+
+
+how 'this' works in a regular function & arrow function
+=========================================================
+-Regular Function : this - how/where the function is called
+-Arrow Function : this - where the function is written (outer scope / lexical scope)

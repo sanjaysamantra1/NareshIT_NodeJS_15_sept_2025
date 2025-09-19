@@ -1,0 +1,15 @@
+<script>
+    let user = {
+        firstName: 'Virat',
+        lastName: 'Kohli',
+
+        fullName1: function () { // Regular : this - how/where the function called
+            console.log(this.firstName, this.lastName, this); // this = user object
+        },
+        fullName2: () => { // Arrow : this - where the function is written 
+            console.log(this.firstName, this.lastName, this); // this = window
+        }
+    }
+    user.fullName1();
+    user.fullName2();
+</script>

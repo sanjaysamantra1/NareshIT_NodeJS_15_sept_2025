@@ -1,0 +1,30 @@
+<script>
+    class Student {
+        // this = Student
+        firstName = 'Virat';
+        lastName = 'Kohli';
+
+        fullName1() {
+            console.log('Fullname1 ')
+            console.log(this.firstName, this.lastName, this)
+        }
+        fullName2 = () => {
+            console.log('Fullname2 ' + this.firstName, this.lastName, this)
+        }
+    }
+    let std = new Student();
+    // std.fullName1();    //  Regular : this = Student
+    // std.fullName2();    //  Arrow : this = Student
+
+    let a = std.fullName2;  // arrow functions can be stored in a variable and used
+    a();
+    let b = a;
+    b();
+    let c = b;
+    c();
+
+    std.fullName1();
+
+    let x = std.fullName1;
+    x(); // though it is calling fullName1() , inside fullName1() , this = no more Student
+</script>
