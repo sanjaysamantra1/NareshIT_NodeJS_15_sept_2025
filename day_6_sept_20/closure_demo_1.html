@@ -1,0 +1,20 @@
+<script>
+    var a = 10;   // window / global
+    let b = 20;   // script
+    const c = 30; // script
+
+    function demo1() {
+        let d = 40;  // Closure
+        function demo2() {
+            let e = 50; // local
+            console.log(a, b, c, d, e);
+        }
+        demo2();
+        console.dir(demo2)
+    }
+    demo1();
+    console.dir(demo1)
+
+    // when 'd' is used inside demo1 , its scope is function
+    // when 'd' is used inside demo2 , its scope is closure
+</script>

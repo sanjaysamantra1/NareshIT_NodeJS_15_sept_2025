@@ -1,0 +1,21 @@
+CallBack functions
+==================
+-when a function is passed as an argument to another function. the passed function is callback
+-when we want to call a function after a specific task is done.
+
+
+HigherOrder function
+====================
+-A function that has ability to take another function as argument, is HigherOrder
+-A function that has ability to return another function, is called HigherOrder
+
+
+Closure
+=======
+-Inner functions retain access to outer functions data even after outer function execution is over.
+-Encapsulation
+
+
+Note: 
+-Closure Scope is not attached for outer functions 
+-Closure scope gets attached to inner functions only if inner function accesses outer function data

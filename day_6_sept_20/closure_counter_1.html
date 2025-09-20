@@ -1,0 +1,19 @@
+<body>
+    <button onclick="increment()">Increment</button>
+    <button onclick="sayHi()">SayHI</button>
+
+    <h1>Count is: <span>0</span></h1>
+
+    <script>
+        function increment() {
+            let count = 0; // function / Global
+            count++;
+            document.querySelector('span').innerHTML = count;
+        }
+        function sayHi() {
+            count++;
+            document.querySelector('span').innerHTML = count;
+            console.log('Hiiiiiiiiiii')
+        }
+    </script>
+</body>
