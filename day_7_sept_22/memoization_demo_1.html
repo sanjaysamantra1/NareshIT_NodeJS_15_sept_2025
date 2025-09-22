@@ -1,0 +1,16 @@
+<script>
+    let count = 0;
+    function fibonacci(n) {
+        console.log('called ', count++);
+        if (n <= 1) {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    console.time();
+    let result = fibonacci(10);
+    console.timeEnd();
+    console.log('result is ', result);
+
+    // 0 1 1 2 3 5 8 13 21 34 55 89
+</script>

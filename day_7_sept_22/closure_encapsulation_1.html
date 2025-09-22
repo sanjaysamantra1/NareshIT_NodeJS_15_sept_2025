@@ -1,0 +1,30 @@
+<script>
+    let account = { accNo: 12345, accBal: 5000 };
+    console.log(account.accNo, account.accBal); // Read
+    account.accBal = -5000;
+    console.log(account.accNo, account.accBal);
+
+    function openAccount(initialAmt) {
+        let accNo = 112233;
+        let accBal = initialAmt;
+        return {
+            deposit: function (amtToDeposit) {
+                if (amtToDeposit > 0) {
+                    accBal = accBal + amtToDeposit;
+                } else {
+                    alert('Sorry!! I dont need your money!!!')
+                }
+            },
+            checkBal: function () {
+                console.log(`AccNo:${accNo} , balance:${accBal}`)
+            }
+        }
+    }
+    let encapsulatedAccount = openAccount(3000);
+    console.log(encapsulatedAccount);
+    encapsulatedAccount.checkBal();
+    encapsulatedAccount.deposit(5000);
+    encapsulatedAccount.deposit(-20000); // withdraw
+    encapsulatedAccount.checkBal();
+    console.dir(encapsulatedAccount);
+</script>

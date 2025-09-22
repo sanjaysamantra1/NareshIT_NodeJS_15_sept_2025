@@ -1,0 +1,16 @@
+<script>
+    function apiClient(baseUrl) { // function currying
+        return function (endPoint) {
+            return function (options = {}) {
+                return fetch(`${baseUrl}${endPoint}`, options).then(res => res.json());
+            }
+        }
+    }
+    const api = apiClient('https://jsonplaceholder.typicode.com'); // reusability
+
+    const getUsers = api('/users')
+    const getComments = api('/comments')
+
+    getUsers().then(console.log)
+    getComments().then(console.log)
+</script>

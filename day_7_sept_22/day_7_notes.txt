@@ -1,0 +1,24 @@
+Function Currying
+=================
+-transforming a function that takes multiple arguments into a series of function that take 1 arg at a time.
+    function add(a,b,c){ // normal function
+        console.log(a+b+c)
+    }
+    function add(a){ // function currying
+        return function(b){
+            return function(c){
+                console.log(a+b+c)
+            }
+        }
+    }
+
+
+Recursion
+=========
+-A function calling itself until a condiotion is met
+
+
+memoization
+===========
+-an optimization technique to store previously computed results to avoid redundant work
+

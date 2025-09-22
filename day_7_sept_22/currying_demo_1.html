@@ -1,0 +1,10 @@
+<script>
+    function add(a) { // function currying
+        return function (b) {
+            return function (c) {
+                console.log(a + b + c)
+            }
+        }
+    }
+    add(10)(20)(30);
+</script>

@@ -1,0 +1,19 @@
+<script>
+    let count = 0;
+    function fibonacci(n, cache = {}) {
+        console.log('called ', count++);
+        if (cache[n]) {
+            return cache[n];
+        }
+        if (n <= 1) {
+            return n;
+        }
+        return cache[n] = fibonacci(n - 1, cache) + fibonacci(n - 2, cache);
+    }
+    console.time();
+    let result = fibonacci(10);
+    console.timeEnd();
+    console.log('result is ', result);
+
+    // 0 1 1 2 3 5 8 13 21 34 55 89
+</script>
