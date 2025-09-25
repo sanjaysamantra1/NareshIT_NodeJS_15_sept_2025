@@ -1,0 +1,15 @@
+<script>
+    const name = 'sanjay';
+    const items = ['Laptop', 'Mouse', 'Keyboard'];
+
+    const emailTemplate = `
+    <h1>Hello, ${name}</h1>
+    <p>Thans for order, Here's what you ordered:</p>
+    <ul>
+        ${items.map(item => `<li>${item}</li>`).join('')}
+    </ul>
+    <p>Total Items:${items.length}</p>
+    `;
+    document.write(emailTemplate)
+
+</script>
