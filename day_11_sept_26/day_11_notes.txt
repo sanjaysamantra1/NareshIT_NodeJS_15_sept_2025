@@ -1,0 +1,36 @@
+11. arrow functions
+12. From apply() to the spread operator (...)
+13. Enhanced Object Literals
+14. From constructors to classes
+15. inheritance - Object.create() , class & extends
+16. Modules
+17. collection-Map,weakmap,Set,weakset
+18. promise and async-await
+19. generators
+20. Tail Calls
+
+
+inheritance:
+------------
+-A class inherits properties and menthods from another class
+-child , parent
+-Code Re-usability
+Is:a Relationship
+
+
+Modules
+=======
+-Modules allow us to split our code into separate files, each focusing on a specific feature.
+-Easier to maintain, Reusable 
+- CJS , ESM , UMD , AMD 
+-2 Commonly Module Systems   
+	a. CommonJS Module System      (module.exports , require()) Nodejs
+	b. ECMASCRIPT Module System    (export , import)            React, angular
+
+
+ESM
+===
+1. default export
+2. named export
+
+ex: import React,{Component} from 'react';
