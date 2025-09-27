@@ -1,0 +1,20 @@
+callbacks
+=========
+-callback is a function which is called after a task is done.
+-when a function is passed as argument to another function, its callback
+-callback hell : nested callbacks
+
+Promise
+=======
+-A promise represents a value that will be available in future.
+
+Pending --> waiting
+fulfilled --> success --> resolve()
+rejected --> failure --> reject()
+Promise class Methods : resolve() , reject(), all(), race(), allSettled()
+
+
+async await
+============
+--syntatic change built on top of promise
+-it makes asynchronous code look synschronous
