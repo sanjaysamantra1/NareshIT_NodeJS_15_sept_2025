@@ -10,8 +10,9 @@ if (!fs.existsSync(dirName)) {
 }
 
 // create and write content to a file
-fs.writeFileSync(fileName, 'Hellooo NodeJS!!!')
-console.log('Write Operation is done...')
+fs.writeFile(fileName, 'Hellooo NodeJS!!!',(err,data)=>{
+    console.log('Write Operation is done...')
+})
 
 // Write more content to the file
 fs.appendFileSync(fileName, '\nHiiiiii NodeJS!!!')

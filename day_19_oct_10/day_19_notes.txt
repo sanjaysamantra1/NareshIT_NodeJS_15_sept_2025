@@ -14,3 +14,7 @@ fs.utimes(path, atime, mtime, callback)	Changes the timestamp of the file.
 fs.exists(path, callback)	Determines whether the specified file exists or not.
 fs.access(path[, mode], callback)	Tests a user's permissions for the specified file.
 fs.appendFile(file, data[, options], callback)	Appends new content to the existing file.
+
+Assignment:
+Read a directory , list all the files / sub-directories in that directory
+while printing file name, use file icon / folder icon based on the file type
