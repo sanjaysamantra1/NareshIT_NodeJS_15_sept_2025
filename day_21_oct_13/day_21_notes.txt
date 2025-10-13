@@ -1,0 +1,60 @@
+PUT vs POST
+-----------
+-PUT for UPDATE operations, POST for CREATE operations.
+-PUT is idempotent, where POST is non-idempotent.
+-Idempotence(producing the same result even if the same request is made multiple times)
+-(PUT)if you retry a request N times, that should be equivalent to single request modification.
+-(POST)if you retry the request N times, you will end up having N resources with N different URIs created on server.
+-Use PUT when you want to modify a singular resource which is already a part of resources collection.
+-Use POST when you want to add a child resource under resources collection.
+
+
+PUT vs PATCH
+------------
+-PUT is used to replace a complete resource.
+-PATCH is used to apply partial modifications to a resource.
+
+
+Express.JS
+==========
+-Express.js is a web application framework for building RESTful APIs with Node.js.
+-a framework is a set of helper functions,tools and rules that help us to build our application.
+-It provides various features that make web application development fast and easy which otherwise takes more time using only Node.js.
+-Alternatives to Express.js are 'NestJS' , 'LoopBack','koa','sails.js'
+-NestJS : A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+
+https://expressjs.com/en/starter/examples.html
+
+
+	Use Case			  Best Choice
+======================================
+Small, flexible apps		Express.js
+Scalable enterprise apps	NestJS
+Auto-generated APIs			LoopBack
+Microservices				NestJS or Express
+CRUD-heavy APIs				LoopBack
+
+
+Advantages of Express.js
+========================
+-Makes Node.js web application development fast and easy.
+-Easy to configure and customize.
+-Allows to define routes of your application based on HTTP methods and URLs.
+-Includes various middleware modules which you can use to perform additional tasks on request and response.
+-Easy to integrate with different template engines like Jade, Vash, EJS etc.
+-Allows to define an error handling middleware.
+-Easy to serve static files and resources of your application.
+-Allows to create REST API server.
+-Easy to connect with databases such as MongoDB, Redis, MySQL.
+
+
+
+How to use Express
+==================
+1. import express
+   const express = require('express')
+2. create an instance of express.
+   const app = express()
+3. use methods
+   app.get(route, callback)
+   app.post(route, callback)
