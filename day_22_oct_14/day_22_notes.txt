@@ -1,0 +1,44 @@
+Express Methods
+===============
+app.get()
+app.post()
+app.put()
+app.patch()
+app.delete()
+app.listen()
+app.use()
+app.all()
+
+app.use() vs app.get()
+======================
+-app.use() can handle all type of HTTP requests(GET,POST,PUT,DELETE)
+-app.use() is generally used for introducing middlewares.
+ app.use(express.json()); // express.json() is middleware
+-app.get() is only for handling GET HTTP requests.
+ app.get('/users', (req, res) => { 
+    res.send('all users')
+ })
+
+
+app.use() vs app.all()
+======================
+app.use() will only see whether url starts with specified path.
+app.all() will match the complete path.
+
+app.use( "/book" , middleware);
+// will match /book
+// will match /book/author
+// will match /book/subject
+// won't match /book-123
+
+app.all( "/book" , handler);
+// will match /book
+// won't match /book/author   
+// won't match /book/subject  
+// won't match /book-123  
+
+app.all( "/book/*" , handler);
+// won't match /book   
+// won't match /book-123      
+// will match /book/author
+// will match /book/subject
