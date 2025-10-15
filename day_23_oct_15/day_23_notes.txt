@@ -1,0 +1,144 @@
+Express.js Request Object Properties
+====================================
+req.app
+req.body
+req.cookies
+req.hostname
+req.ip
+req.method
+req.params
+req.path
+req.protocol
+req.query
+
+
+
+Response methods
+================
+The methods on the response object (res) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
+
+Method	Description
+res.send()	Send a response of various types. (Buffer / JSON / HTML / String)
+res.end()	End the response process.
+res.json()	Send a JSON response.
+res.jsonp()	Send a JSON response with JSONP support.
+res.redirect()	Redirect a request.
+res.render()	Render a view template.
+res.sendFile()	Send a file as an octet stream.
+res.download()	Prompt a file to be downloaded.
+res.sendStatus()	Set the response status code and send its string representation as the response body.
+
+
+Status() vs sendStatus()
+========================
+res.sendStatus(200); // equivalent to res.status(200).send('OK')
+res.sendStatus(201); // equivalent to res.status(201).send('Created')
+res.sendStatus(403); // equivalent to res.status(403).send('Forbidden')
+res.sendStatus(404); // equivalent to res.status(404).send('Not Found') 
+res.sendStatus(500); // equivalent to res.status(500).send('Internal Server Error')
+
+
+
+Express Routing
+===============
+-Routing refers to how an application’s endpoints (URIs) respond to client requests.
+-Route paths, in combination with a request method, define the endpoints at which requests can be made.
+-Route paths can be strings, string patterns, or regular expressions
+
+Examples:
+app.get('/ab?cd');   // will match acd and abcd
+app.get('/ab+cd');   // will match abcd, abbcd, abbbcd
+app.get('/ab*cd');   // will match abcd, abxcd, abRANDOMcd, ab123cd
+app.get('/ab(cd)?e'); // will match /abe and /abcde
+app.get(/.*fly$/);  // will match butterfly and dragonfly, but not butterflyman, dragonflyman
+
+app.all('*',(req,res)=>{
+    res.status(404).send('No such page found')
+});
+
+
+
+Express PathParam & QueryParam
+==============================
+1. Path-Param
+	ex:- /users/101
+	const userId = req.params.userId;
+	
+Few More Path Params:
+app.get('/products/:productId([0-9])/ratings')
+app.get('/products/:productId([0-9])/ratings/:ratingId')
+
+2. Query-param
+	ex:- /search?searchWord=skybag&filter=something
+	const {searchWord,filter} = req.query;
+
+
+
+express.Router()
+================
+-express.Router() creates a new router object that can handle requests in a modular and organized way
+
+Modularity: Group routes based on features or functionality. (users, products,  orders)
+Scalability: Organize routes for large applications and separate them into different modules.
+Middleware Management: Apply middleware to specific routes or groups of routes easily.
+Cleaner Code: By dividing routes into smaller, focused files, our codebase remains clean and readable.
+
+1. Define the handler function
+   app.use('/users',userRouter);
+2. user_routes.js
+   let userRouter = express.Router();
+   userRouter.get('/', getAllUsers);
+3. user_controller.js
+   const getAllUsers = (req, res) => {
+    res.status(200).json(users)
+   }
+	
+
+Middlewares
+===========
+-Middlewares in ExpressJS are functions that can modify Request and Response objects.
+-Middleware functions can handle logging, authentication, and input validation before passing control to the next handler.
+
+
+
+without middleware : 
+	request => Route => Response
+with middleware : 
+	request => middleware1 => middleware2 => Route => Response
+
+https://www.turing.com/kb/building-middleware-for-node-js
+https://expressjs.com/en/guide/using-middleware.html
+https://expressjs.com/en/resources/middleware/body-parser.html
+
+
+
+An Express application can use the following types of middleware:
+1. Application-level middleware
+   app.use(logger)
+2. Router-level middleware
+   const userRouter = express.Router();
+   userRouter.use(logger);
+3. Error-handling middleware
+   Note : To manually trigger error handling middleware, we can pass an error object to the next() function
+   try{
+   }catch(err){
+	 next(err); // transfers error object to error handling middleware
+   }   
+4. Built-in middleware
+    express.static()
+	express.json()        converts request body to JSON.     
+	express.urlencoded()  converts form-data to JSON
+5. Third-party middleware 
+   cors , body-parser, cookie-parser
+   
+
+
+Q.How to run a middleware for all the routes in an application
+  app.use(logger);
+  
+Q.How to run a middleware for all the routes for a router object
+  const userRouter = express.Router();
+  userRouter.use(logger);
+
+Q.How to run a middleware for a particular route
+  app.get('/route1', middleware,routeHandler);
