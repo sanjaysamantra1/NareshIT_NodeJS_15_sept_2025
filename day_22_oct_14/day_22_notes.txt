@@ -42,3 +42,24 @@ app.all( "/book/*" , handler);
 // won't match /book-123      
 // will match /book/author
 // will match /book/subject
+
+
+middleware
+==========
+-a piece of code that should be executed before the request reaches the route.
+-Request --> middleware1  --> middleware N --> Route --> Response
+
+
+Route Params
+============
+1. path Params 
+   1 Param
+   Client : employees/1
+   Server : employees/:id, req.params.id
+2. Query Params
+   multiple Params
+   Client : employees?name=subasish&&add=bngalore
+   Server : req.query
+
+
+

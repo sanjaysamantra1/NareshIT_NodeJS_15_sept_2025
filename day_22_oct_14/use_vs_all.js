@@ -3,7 +3,7 @@ const app = express();
 
 app.get('/users', (req, res) => {
     console.log('GET request for users')
-    res.end("GET request for users");
+    res.send("GET request for users");
 });
 app.use('/employees', (req, res) => {
     console.log('USE request for employees');
