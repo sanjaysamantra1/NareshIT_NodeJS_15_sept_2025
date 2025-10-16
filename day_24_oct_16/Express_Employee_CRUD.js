@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
 
 
+
 const fileLogger = (req, res, next) => {
     console.log(`File Logger Request Method: ${req.method}, Request URL: ${req.url}, Time: ${new Date().toISOString()}`);
     const logMessage = `Request Method: ${req.method}, Request URL: ${req.url}, Time: ${new Date().toISOString()}\n`;
@@ -88,8 +89,8 @@ let myErrorHandler = (err, req, res, next) => {
         success: false,
     });
 };
-app.use(myErrorHandler)
 
+app.use(myErrorHandler)
 app.listen(3000, () => {
     console.log("app started on port 3000");
 });

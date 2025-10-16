@@ -1,0 +1,143 @@
+Middlewares
+===========
+-Middlewares in ExpressJS are functions that can modify Request and Response objects.
+-Middleware functions can handle logging, authentication, and input validation before passing control to the next handler.
+
+
+
+without middleware : 
+	request => Route => Response
+with middleware : 
+	request => middleware1 => middleware2 => Route => Response
+
+https://www.turing.com/kb/building-middleware-for-node-js
+https://expressjs.com/en/guide/using-middleware.html
+https://expressjs.com/en/resources/middleware/body-parser.html
+
+
+
+An Express application can use the following types of middleware:
+1. Application-level middleware
+   app.use(logger)
+2. Router-level middleware
+   const userRouter = express.Router();
+   userRouter.use(logger);
+3. Error-handling middleware
+   Note : To manually trigger error handling middleware, we can pass an error object to the next() function
+   try{
+   }catch(err){
+	 next(err); // transfers error object to error handling middleware
+   }   
+4. Built-in middleware
+    express.static()
+	express.json()        converts request body to JSON.     
+	express.urlencoded()  converts form-data to JSON
+5. Third-party middleware 
+   cors , body-parser, cookie-parser
+   
+
+
+Q.How to run a middleware for all the routes in an application
+  app.use(logger);
+  
+Q.How to run a middleware for all the routes for a router object
+  const userRouter = express.Router();
+  userRouter.use(logger);
+
+Q.How to run a middleware for a particular route
+  app.get('/route1', middleware,routeHandler);
+  
+
+logger middleware
+==================
+const logger = (req, res, next) => {
+    console.log(`URL:${req.url} , method:${req.method} , Time:${new Date().toLocaleTimeString()}`)
+    next();
+}
+ 
+authenticate middleware
+=====================
+const authenticate = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token || token !== 'mysecrettoken') {
+		res.status(401).json({ message: 'Unauthorized' });	
+    } else {
+         next(); // User is authenticated, proceed to next middleware or route handler
+    }
+};
+
+
+Error handler
+=============
+let myErrorHandler = (err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || 'Something went wrong, Try again!';
+ 
+  res.status(errorStatus).json({
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+    success: false,
+  });
+};
+Note : this should be present after all the routes & before app.listen(5000)
+
+
+
+Serving static files in Express
+===============================
+-To serve static files such as images, CSS files, and JavaScript files, use the express.static() built-in middleware function in Express. 
+express.static(root<directory Name>, [options])
+-The root argument specifies the root directory from which to serve static assets.
+ app.use(express.static('public'))
+-To use multiple static assets directories, call the express.static() middleware function multiple times:
+	app.use(express.static('public'))
+	app.use(express.static('files'))
+
+
+Body-parser
+===========
+-parse the body of requests which have payloads attached to them.
+-Parse incoming request bodies(formData) in a middleware before handlers are invoked.
+-extracts the body portion of an incoming request & exposes it on req.body.
+-parses the data submitted using HTTP POST request.
+ npm install body-parser --save
+ 
+ // parse application/x-www-form-urlencoded
+ app.use(bodyParser.urlencoded({ extended: false }))
+
+ // parse application/json
+ app.use(bodyParser.json())
+ 
+ 
+Note: ExpressJS provides its inbuilt functions for parsing request body
+	app.use(express.json()); 
+	app.use(express.urlencoded()); 
+ 
+
+
+cookie-parser
+=============
+-To Read cookie information from client.
+-It parses Cookie header and populate req.cookies with an object keyed by cookie names. 
+-To Store cookies in client, cookie-parser is not required
+-cookie-parser is required while reading cookie information from browser.
+
+1. How to Read Client cookie data in Server:
+	const cookieParser = require('cookie-parser');
+	app.use(cookieParser());
+	
+	app.get('/getCookie', (req, res,next) => {
+		res.send(req.cookies); // server can read cookie data from request object
+	});
+2. How server can set cookie in client's browser
+   app.get('/setCookie', (req, res,next) => {
+		res.cookie('name','sanjay')
+		res.cookie('add','bangalore')
+    });
+3. How server can delete cookie from client's browser
+   app.get('/setCookie', (req, res,next) => {
+		res.clearCookie('name');
+    });
+
+
