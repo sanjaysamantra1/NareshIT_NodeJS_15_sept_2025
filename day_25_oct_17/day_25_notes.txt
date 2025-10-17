@@ -1,0 +1,14 @@
+Express Validators (https://express-validator.github.io/docs/guides/getting-started)
+==================
+-An express.js middleware for validator.
+-can validate and sanitize express requests.
+-Validation chains are created by functions such as body(), param(), query(), and so on.
+-Validators determine if the value of a request field is valid.
+-Sanitizers transform the field value.
+-Modifiers define how validation chains behave when they are run.
+ This might include adding conditions on when they should run
+
+ex:
+const createEmailChain = () => body('email').isEmail();
+app.post('/login', createEmailChain(), handleLoginRoute);
+app.post('/signup', createEmailChain().custom(checkEmailNotInUse), handleSignupRoute);
