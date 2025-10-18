@@ -12,3 +12,10 @@ ex:
 const createEmailChain = () => body('email').isEmail();
 app.post('/login', createEmailChain(), handleLoginRoute);
 app.post('/signup', createEmailChain().custom(checkEmailNotInUse), handleSignupRoute);
+
+
+joi
+===
+-The most powerful schema description language and data validator for JavaScript.
+-works standalone , no need to be used as middleware
+-nested object, array , custom message

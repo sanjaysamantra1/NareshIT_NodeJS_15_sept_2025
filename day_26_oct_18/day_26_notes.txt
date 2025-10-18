@@ -1,0 +1,36 @@
+NodeJs and Typescript
+=====================
+1. npm init -y
+2. npm install express typescript ts-node @types/node @types/express
+3. npx tsc --init  (OR) tsc --init  (Generates tsconfig.json)
+4. add CRUD code
+5. npx ts-node src/app.ts
+		(OR)
+   a. npx tsc  b. node dist/app.js
+
+
+tsconfig.json
+-------------
+{
+  "compilerOptions": {
+    "lib": [
+      "es6"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
