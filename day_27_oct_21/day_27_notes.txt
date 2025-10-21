@@ -49,3 +49,22 @@ app.use((err, req, res, next) => {
   logger.error(`Error: ${err.message}`);
   res.status(500).send('Something went wrong!');
 });
+
+
+
+Express generator
+=================
+1. npm install -g express-generator
+2. express project1 (--view=jade  default)
+   express --view=pug/ejs project1
+   npx express-generator project2
+   express project3 --no-view
+3. once the project is created, run the below commands to start the app
+	cd project1
+	npm install
+	npm start
+
+
+Folder Structure for NodeJS & ExpressJS project
+================================================
+https://dev.to/mr_ali3n/folder-structure-for-nodejs-expressjs-project-435l
