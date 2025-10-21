@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "winston": "^3.18.3"
   }
 }

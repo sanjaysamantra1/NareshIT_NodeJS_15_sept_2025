@@ -1,13 +1,26 @@
 const express = require('express')
-const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path')
+const winston = require('winston')
 const app = express();
 app.use(express.json());
 
-// Morgan Setup
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan('combined', { stream: accessLogStream }))
+
+// Configure Winston logger
+const logger = winston.createLogger({
+  level: 'info', // Log level: 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(), // Log to the console
+    new winston.transports.File({ filename: 'app.log' }) // Log to a file
+  ]
+});
+
+app.use((req, res, next) => {
+  logger.info(`HTTP ${req.method} ${req.url}`);
+  next();
+});
+
+
+
 
 let employees = [
     { "eId": 101, "name": "sanjay", "sal": 5000, "gender": "male" },

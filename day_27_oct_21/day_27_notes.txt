@@ -18,6 +18,10 @@ Morgan
    app.use(morgan('tiny'));
    app.use(morgan('dev'));
    app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+write logs to a file:
+---------------------
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 
 
 Winston

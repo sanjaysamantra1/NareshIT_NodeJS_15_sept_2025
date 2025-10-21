@@ -1,9 +1,6 @@
-::1 - - [21/Oct/2025:02:38:26 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:27 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:27 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:27 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:28 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:28 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:28 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:28 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
-::1 - - [21/Oct/2025:02:38:28 +0000] "GET /employees/101 HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+GET 304 /employees/101 - [object Object]
+GET 304 /employees/101 - [object Object]
+GET 304 /employees/101 - [object Object]
+GET 304 /employees/101 - [object Object]
+GET 304 /employees/101 - [object Object]
+PATCH 200 /employees/101 application/json {"sal":8000}
