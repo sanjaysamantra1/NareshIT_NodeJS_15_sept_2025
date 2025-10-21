@@ -1,0 +1,15 @@
+{
+  "name": "day_27_oct_21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Express_Employee_CRUD.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "morgan": "^1.10.1"
+  }
+}
