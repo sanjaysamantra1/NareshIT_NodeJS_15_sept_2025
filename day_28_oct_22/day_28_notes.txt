@@ -1,0 +1,127 @@
+CORS(Cross-Origin-Resource-Sharing)
+====
+-CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to prevent harmful cross-origin requests. 
+-It blocks requests made from one origin(protocol / domain / port) to another origin unless explicitly allowed by the server.
+-CORS allows servers to specify which domains can access their resources/API.
+-Its a server mechanism, tells It’s okay for this origin to request data from me.
+
+A cross-origin request happens when:
+The protocol (HTTP/HTTPS), domain (example.com), or port (8080) differs from the origin where the browser is loading the page from.
+For example, if a webpage at http://localhost:3000 tries to make an API request to http://api.example.com, this is considered a cross-origin request.
+
+
+Key Features:
+-Prevents unauthorized cross-origin requests: 
+	By default, browsers block requests made from one domain to another (a different origin). The cors middleware enables specific domains or all domains to access your resources.
+-Customizable origin policies: 
+	We can whitelist specific origins, methods, and headers that are allowed to interact with your server.
+
+
+-CORS is a npm package.
+fetch('http://localhost:5000/employees').then(res=>res.json().then(data=>console.log(data)));
+ 
+
+
+How Does CORS Work
+------------------
+-When a browser detects a cross-origin request, it sends an HTTP OPTIONS request (Preflight request) before making the actual request
+ for cross-origin requests ((PUT/PATCH/DELETE))
+-The server must respond with appropriate CORS headers to indicate whether the request is allowed.
+-Server responds with the correct CORS headers so the browser, app.options('*', cors()); 
+	Access-Control-Allow-Origin: https://example.com
+	Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+	Access-Control-Allow-Headers: Content-Type, Authorization
+These headers tell the browser which domains, methods, and headers are permitted.
+-Tools like Postman,Will not trigger preflight — they ignore CORS
+
+
+
+
+
+Enabling CORS:
+--------------
+const cors = require('cors');
+const app = express();
+app.use(cors()); // Enable CORS for all origins ,  By default, cors() allows all origins (Access-Control-Allow-Origin: *)
+
+const corsOptions = {
+    origin: 'https://example.com', // Allow only this domain
+    methods: ['GET', 'POST'], // Allow specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+}
+app.use(cors(corsOptions)); // allow only certain origins, methods & headers
+
+
+Default Configuration 
+corsOptions = {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+
+const whitelist = ['http://example1.com', 'http://example2.com']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+https://www.npmjs.com/package/cors
+
+
+
+CURL
+====
+-Client URL 
+-A command-line tool used for making HTTP requests & testing network connections.
+-Most systems come with cURL pre-installed
+
+curl [options] [URL]
+curl --help
+-X : Request
+
+GET Request: 
+	curl http://localhost:5000/ 
+	curl -X GET https://api.example.com/data
+POST Request:
+	curl -X POST https://api.example.com/data -d "name=John&age=30"
+	curl -X POST https://api.example.com/data -H "Content-Type: application/json" -d '{"name": "John", "age": 30}'
+PUT Request:
+	curl -X PUT https://api.example.com/data/123 -H "Content-Type: application/json" -d '{"name": "John Updated"}'
+DELETE Request:
+	curl -X DELETE https://api.example.com/data/123
+Handling Headers:
+	curl -H "Authorization: Bearer OUR_TOKEN" https://api.example.com/protected
+	curl -H "Content-Type: application/json" -H "Accept: application/json" https://api.example.com
+View Response Headers:
+	curl -I http://localhost:5000/ 
+	curl --include http://localhost:5000/ 
+	curl -v(verbose) https://api.example.com
+
+
+
+Helmet
+======
+-It Helps to secure Node.js application by setting several HTTP headers.
+-automatically adds or removes HTTP headers to comply with web security standards.
+-It protects against XSS, clickjacking, MIME sniffing, and other vulnerabilities.
+-Express applications do not come with security HTTP headers out of the box.
+-Without Helmet, default headers returned by Express expose sensitive information and make your Node.js app vulnerable to malicious actors
+
+
+curl http://localhost:3000/
+curl http://localhost:3000/ --include
+Or
+use an HTTP client such as Postman to inspect the HTTP headers of the response
+
+without Helmet
+==============
+-response header should have X-Powered-By header. As with all headers that begin with X-, it is a non-standard header. X-Powered-By indicates the name and version number of the framework or library used by the server to generate the HTTP response.
+-we should never give attackers details about our tech stack.
+
+https://securityheaders.com/
