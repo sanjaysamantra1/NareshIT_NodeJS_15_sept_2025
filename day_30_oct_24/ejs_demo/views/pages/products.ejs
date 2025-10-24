@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <nav><%- include('../partials/navbar.ejs') %></nav>
+    <div><%- include('../partials/carousel.ejs') %></div>
+    <div class="container">
+      <div class="row">
+        <% products.forEach(function(product) { %>
+        <div class="col-sm-3">
+          <div class="card text-center">
+            <img
+              src="<%= product.image%>"
+              class="card-img-top"
+              alt="..."
+              style="height: 200px"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= product.category%></h5>
+              <p class="card-text text-truncate"><%= product.title%></p>
+              <p class="card-text text-truncate"><%= product.descriptions%></p>
+              <p class="card-text text-truncate">Price: <%= product.price%></p>
+              <p class="card-text text-truncate">
+                Rating: <%= product.rating.rate%>
+              </p>
+              <a href="#" class="btn btn-primary">Details</a>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <head>
+      <%- include('../partials/footer.ejs') %>
+    </head>
+  </body>
+</html>
