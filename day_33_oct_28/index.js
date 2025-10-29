@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const { MongoClient } = require('mongodb');
 const employeeRouter = require('./routes/employee_route');
 const productRouter = require('./routes/product_route');
 const {connectDB} = require('./utils/db_utils');
