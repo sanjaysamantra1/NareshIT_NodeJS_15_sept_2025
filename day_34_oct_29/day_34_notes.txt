@@ -21,3 +21,93 @@ MongoDB Atlas
 Follow the Steps mentioned in the below URL
 https://www.javatpoint.com/mongodb-atlas
 https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/
+
+
+
+Q. find() vs findOne()
+======================
+findOne() - if query matches, first document is returned, otherwise null.
+			findOne() never returns a cursor
+			cursor methods cannot be used with the returned value of findOne()
+find() - no matter the number of documents matched, a cursor is returned, never null.
+
+-cursor is a pointer that references the documents of the collection returned.
+-cursor will find 20 documents at once.
+-db.employees.find({sal:8000}).forEach(ele=>print(ele.name))
+
+cursor Methods: count() , forEach(print,printjson), hasNext(), isClosed(), close(), explain(), limit(),map(),max(),min(),pretty(), size(), skip(), sort(), toArray()
+
+
+MongoDB Datatypes
+=================
+-String
+-Boolean
+-Numebr  
+	Int32 
+	Long 
+	Double
+-Date 
+	Date()  : returns the current date as a string
+	new Date() : returns a Date object
+	ISODate()  : returns a Date object using the ISODate()
+-ObjectId : new ObjectId()
+	A special type used to uniquely identify documents in a collection
+-Timestamp : new Timestamp() 
+ Timestamp{ "t": <integer>, "i": <integer> } Used for ordering when there are multiple operations within a given second
+
+
+
+
+
+MongoDB Query Operators
+=======================
+Comparison : $eq, $ne, $gt, $gte, $lt, $lte, $in, $nin
+Logical    : $and, $or, $nor, $not  
+Element Query : $exists , $type , 
+Evaluation : $regex, $text, $where, $expr , $mod 
+Array Query : $all , $elemMatch , $size 
+
+
+$regex
+======
+db.employees.find( { phone: { $regex: /789$/ } } );  
+db.employees.find( { email: { $regex: /.org$/ } } );  // ends with .org
+db.comments.find({email:{$regex:/^ka/i}})    // starts with Ka
+db.comments.find({status:{$regex:/^(active|pending)/}})   // status : active | pending
+db.comments.find({name:{$regex:/^sanjay$/}}); // exact match
+
+
+$text
+=====
+db.articles.find( { $text: { $search: "coffee" } } )
+db.articles.find( { $text: { $search: "Coffee", $caseSensitive: true } } )
+db.articles.find( { $text: { $search: "bake coffee cake" } } ) 
+ bake / coffee / cake
+db.articles.find( { $text: { $search: "\"coffee shop\"" } } )
+ coffee shop
+db.articles.find( { $text: { $search: "\'coffee shop\' \'Cafe con Leche\'" } } )
+ Or
+$where
+db.table3.find( { $where: function() { return (this.english == this.science) }})
+
+
+
+Array
+$addToSet: Adds distinct elements to an array
+ db.employees.updateOne({ empId: 101 },{ $addToSet: { skills: "Docker" } });
+$pop: Removes the first or last element of an array
+$pull: Removes all elements from an array that match the query
+$push: Adds an element to an array
+
+ 
+implicit and vs explicit $and
+==============================
+implicit - {name:'abc',sal: 6000}
+Explicit - { $and: [ {name:'sanjay',sal:6000}] }
+
+db.employees.deleteMany({name:'sanjay',name:'geeta',name:'sameer'})
+-only sameer will be deleted, first 2 conditions are ignored
+
+-don't use implecit AND if the field name is same;
+-it ignores the first condition, only executes second condition.
+db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
