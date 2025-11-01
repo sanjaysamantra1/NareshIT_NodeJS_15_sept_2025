@@ -3,6 +3,7 @@ const employeeModel = require('../models/employee_model')
 exports.getAllEmployees = async (req, res) => {
     try {
         const employees = await employeeModel.find();
+        console.log(employees[0])
         res.json(employees);
     } catch (err) {
         console.error(err);
