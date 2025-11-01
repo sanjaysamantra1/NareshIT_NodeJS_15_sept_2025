@@ -1,0 +1,250 @@
+ODM (Object-Document Mapping)
+=============================
+-ORM : Used with relational databases like MySQL and PostgreSQL
+-ODM : Used with non-relational databases like MongoDB, Cassandra, and Redis
+-ODM maps between objects in code and documents in a NoSQL database collection.
+-ODM provides a schema-based solution for modeling application data.
+-built-in features like type casting, validation, query building etc.
+-They streamline database operations, enhance code organization, and boost developer productivity
+-There are many ODM/ORM solutions available - Mongoose, Sequelize
+
+Mongoose
+========
+-Mongoose is a MongoDB object modeling tool.
+-Mongoose is a JavaScript object-oriented programming library that creates a connection between MongoDB and the Node.js.
+-Provides features like: Data validation, Middleware and hooks, Schema enforcement, Abstraction
+
+https://mongoosejs.com/docs/guide.html
+https://mongoosejs.com/docs/validation.html#built-in-validators
+
+
+
+Mongoose Terminologies
+======================
+Schema:Mongoose schemas define the structure of the documents in a collection.
+-Each schema maps to a MongoDB collection and defines the shape/structure of the documents within that collection
+ new mongoose.Schema({eId: { type: Number,required:true,min:100,default:20 }});
+ 
+ Schema Types: String, Number, Boolean, Date, Array, ObjectId
+ Validation & Defaults: required: true , unique:true , default: Date.now
+ 
+Model: A model is a wrapper around the schema and represents a collection in MongoDB
+-To use schema definition, we need to convert a Schema into a Model. 
+ mongoose.model(modelName, schema)
+ 
+Constructing Documents:
+-An instance of a model is called a document.
+ const emp = new EmployeeModel({ id:1,name:'sanjay });
+ await emp.save();
+   (or)
+ await emp.create({ id:1,name:'sanjay });
+ 
+Querying: 
+-Finding documents is easy with Mongoose.
+-Query Methods:
+ .find() → Retrieves all documents.
+ .findOne({ email: "john@example.com" }) → Retrieves a single document.
+ .findById(id) → Retrieves by ID
+Ex: await UserModel.find({ add.city:'bangalore }).where('sa').gt(5000).exec();
+
+Update a Document:
+const updatedUser = await User.findByIdAndUpdate(id, { age: 35 }, { new: true });
+{ new: true } ensures the function returns the updated document.
+
+
+Validating:
+-Documents are casted and validated before they are saved. Mongoose first casts values to the specified type and then validates them. 
+-Internally, Mongoose calls the document's validate() method before saving.
+ Built-in Validators : type, required, min, max, enum 
+
+
+Custom Error Messages :
+-Array syntax: min: [6, 'Must be at least 6, got {VALUE}']
+-Object syntax: enum: { values: ['Coffee', 'Tea'], message: '{VALUE} is not supported' }
+
+Mongoose Middleware (Hooks):
+-Mongoose provides pre- and post-hooks that run before or after certain actions.
+ pre('save') → Runs before saving a document.
+ userSchema.pre('save', function(next) {
+  console.log("Before saving:", this);
+  next();
+});
+
+
+Mongoose Virtuals:
+------------------
+-Virtuals allow  to create computed fields without storing them in the database.
+
+1. create a virtual
+	userSchema.virtual('fullName').get(function() {
+	  return this.firstName + this.lastName;
+	});
+2. add the virtual to response object
+   let employeeSchema = new mongoose.Schema({employeeSchema},{toObject: { getters: true },toJSON: { getters: true }})
+   
+   
+   
+
+Populate (Relationships Between Collections):
+-Use populate() to retrieve referenced documents.
+ 
+ const postSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+ });
+const Post = mongoose.model('Post', postSchema);
+const getPosts = async () => {
+  const posts = await Post.find().populate('author');
+  console.log(posts);
+};
+
+
+
+
+Transactions (Atomic Operations):
+-For atomic operations, use Mongoose transactions.
+const session = await mongoose.startSession();
+session.startTransaction();
+try {
+  const user = new User({ name: "Alice", age: 28, email: "alice@example.com" });
+  await user.save({ session });
+
+  await session.commitTransaction();
+  session.endSession();
+} catch (error) {
+  await session.abortTransaction();
+  session.endSession();
+}
+
+
+mongoose vs joi
+===============
+Mongoose : Database Layer, enforces schema types, required fields, unique etc
+joi/express-validator : API/Request Layer (Before saving/processing), payload validation : email is valid format, password length
+
+
+
+Steps to use mongoose
+======================
+1. connect to DB
+   const url = 'mongodb://localhost:27017/june_2024';
+   mongoose.connect(url);
+2. Create Schema
+   let employeeSchema = new mongoose.Schema({
+    eId: { type: Number,required:true },
+    name: { type: String,required:true },
+    sal: { type: Number,required:true },
+    gender: { type: String,required:true  }
+   })
+3. Create a Model
+   let employeeModel = mongoose.model("employees", employeeSchema);
+4. using model try to perform DB operations
+   await employeeModel.find({});
+   
+   
+How to Enable Validation for PUT / PATCH Requests:
+==================================================
+Note: By Default Validations work for POST calls, to run validations for PUT,PATCh , use the below code
+
+Solution-1:	mongoose.set('runValidators', true); 
+
+Solution-2: Set Validation for Each Query
+const updatedUser = await User.findByIdAndUpdate(id, updateData, { 
+    new: true, 
+    runValidators: true // Ensure validation runs
+});	
+
+
+
+What is __v in Mongoose?
+=========================
+-version key(__v), is a property automatically added to documents in MongoDB when they are created or updated through Mongoose
+-It is used for internal versioning — mainly to handle concurrent updates
+-When a new document is created, Mongoose initializes the __v field to 0
+-When a document is updated using methods like save(), Mongoose automatically increments the __v field
+
+
+
+Mongoose Middleware
+===================
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+// Create User Schema
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, 'Username is required'],
+    unique: true,
+    trim: true,
+	lowercase: true,  // Automatically converts input to lowercase
+    minlength: [3, 'Username must be at least 3 characters long'],
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    lowercase: true,
+    validate: {
+      validator: function (v) {
+        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);  // Simple email regex validation
+      },
+      message: props => `${props.value} is not a valid email address!`
+    },
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: [6, 'Password must be at least 6 characters long'],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+
+// Mr. Miss middleware
+employeeSchema.pre('save', async function (next) {
+    const user = this;
+    user.name = user.gender ==='male' ? `Mr. ${user.name}` : `Miss. ${user.name}`;
+    next();
+});
+
+
+// Middleware to hash the password before saving it to the database
+userSchema.pre('save', async function (next) {
+  const user = this;
+  
+  // Only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) return next();
+
+  // Generate a salt
+  const salt = await bcrypt.genSalt(10);
+
+  // Hash the password using the salt
+  user.password = await bcrypt.hash(user.password, salt);
+
+  next();
+});
+
+// Method to compare entered password with the hashed password
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// Create the User model
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+
+
+
+Q. Why Does Mongoose Use _id: ObjectId by Default?
+-ObjectIds are automatically generated by MongoDB.
+-ObjectId is a 12-byte unique identifier that prevents ID collisions.
+-The first 4 bytes of an ObjectId store a timestamp, making it easier to sort by creation time.
+-ObjectId is optimized for indexing, ensuring fast lookups.
+-If we use a Number, we have to manually ensure it's unique. duplicate _id values can occur.
+-For incremental IDs, use an auto-increment sequence system like: MongoDB Counters Collection , UUIDs
