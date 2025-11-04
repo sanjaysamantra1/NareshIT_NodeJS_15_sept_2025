@@ -22,7 +22,7 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         employees: {
             type: new GraphQLList(EmployeeType),
-            resolve: () => employees
+            resolve: () => {employees}
         },
         employee: {
             type: EmployeeType,
