@@ -1,0 +1,77 @@
+
+GraphQL
+=======
+-GraphQL is a query language for APIs.
+-Alternative to REST, providing more flexibility by allowing clients to request only the data they need.
+-Uses a single endpoint for all requests.
+
+
+Advantages of GraphQL
+---------------------
+Single Endpoint: Uses a single /graphql endpoint for all requests.
+Flexible Queries: Clients can specify exactly what data they want.
+Strongly Typed Schema: APIs are defined using a schema with types.
+Real-time Updates: Supports subscriptions for real-time data updates.
+Efficient Data Fetching: Reduces over-fetching and under-fetching of data.
+
+
+		REST          		 	GraphQL
+============================================
+1. Server Driven            	1. Client Driven
+2. Multiple endpoints			2. Single endpoint for all requests
+3. Over-fetching data			3. Client requests exactly what is needed
+4. No strict schema				4. Strongly typed schema
+5. Requires WebSockets 			5. Built-in subscriptions for real-time updates
+   or polling separately
+
+
+Concept			Description
+===============================
+Query			Fetch data (read-only)
+Mutation		Modify data
+Schema			Defines data types & relationships
+Resolver		Function that resolves a query or mutation
+
+
+
+Graphql and graphql-http
+-------------------------
+1. create a project 
+   npm init -y
+2. install required packages
+   npm install graphql graphql-http ruru
+3. Create a GraphQL schema
+   const schema = new GraphQLSchema({
+    query: new GraphQLObjectType({
+        name: 'Query',
+        fields: {
+            hello: {
+                type: GraphQLString,
+                resolve: () => 'Hello World !!',
+            },
+        },
+    }),
+ });
+4. Define a route and call createHandler(Schema)
+  app.all('/graphql', createHandler({ schema }));
+
+5. serve RURU UI
+   app.get('/', (req, res) => {
+     res.end(ruruHTML({ endPoint: '/graphql' }))
+   })
+
+
+
+
+apollographql
+=============
+https://www.apollographql.com/docs
+https://www.apollographql.com/docs/apollo-server
+
+-Apollo Server is an open-source, spec-compliant GraphQL server 
+-Apollo Server is compatible with any GraphQL client, including Apollo Client. 
+-To build a production-ready, self-documenting GraphQL API that can use data from any source.
+-It has its own UI (doesn't use RURU)
+
+
+npm i express cors @apollo/server graphql mongoose
