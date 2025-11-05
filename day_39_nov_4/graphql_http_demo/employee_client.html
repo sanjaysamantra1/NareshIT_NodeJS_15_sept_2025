@@ -1,0 +1,15 @@
+<script>
+  async function getData() {
+    const url = "http://localhost:3000/api/employees";
+    const myQuery = `query { employees { id name gender sal} }`;
+
+    let response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ query: myQuery }),
+      headers: { "Content-Type": "application/json" },
+    });
+    let finalData = await response.json();
+    console.log(finalData);
+  }
+  getData();
+</script>
