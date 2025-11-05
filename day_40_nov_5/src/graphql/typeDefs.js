@@ -17,6 +17,12 @@ export const typeDefs = `
         user(id:ID!):User
         posts:[Post]
         post(id:ID!):Post
-        PostByUser(userId:ID!):[Post]
+        postByUser(userId:ID!):[Post]
+    }
+    type Mutation{
+        createUser(name:String!,email:String!,age:Int!):User
+        createPost(title:String!,content:String!,userId:ID!):Post
+        deleteUser(id:ID!):String
+        deletePost(id:ID!):String
     }
 `
