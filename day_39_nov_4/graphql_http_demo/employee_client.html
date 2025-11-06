@@ -1,7 +1,7 @@
 <script>
   async function getData() {
     const url = "http://localhost:3000/api/employees";
-    const myQuery = `query { employees { id name gender sal} }`;
+    const myQuery = `query { employees { id name} }`;
 
     let response = await fetch(url, {
       method: "POST",
