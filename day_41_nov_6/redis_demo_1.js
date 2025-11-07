@@ -1,3 +1,4 @@
+// localhost:5000/fetchData  ---> express server  ---> en.wikipedia.org
 import express from "express";
 import axios from "axios";
 import { createClient } from "redis";
@@ -13,6 +14,7 @@ app.get('/fetchData', async (req, res) => {
     let countryName = req?.query?.country || "india";
     const url = `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${countryName}`;
 
+    // Redis = { India:India_response , srilanka:srilanka_response}
     const dataInRedis = await redisClient.get(countryName);
     if (dataInRedis) {
         console.log(('Data found in Redis'))
