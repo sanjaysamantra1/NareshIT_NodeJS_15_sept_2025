@@ -27,6 +27,9 @@ app.get('/sendMail', (req, res) => {
                     Good Morning
                 </pre>
             `, // HTML body
+            attachments:[
+                {filaname:'profile.png',path:'./profile.png'}
+            ]
         });
 
         console.log("Message sent Succesfully:", info.messageId);
