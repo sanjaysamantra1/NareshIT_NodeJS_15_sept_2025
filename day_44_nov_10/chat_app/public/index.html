@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      // clients should listen chat event
+      socket.on("chat", (msgData) => {
+        let { userName, message, time } = msgData;
+        let msg = `${userName} : ${message} (${time})`;
+        let newTextForTextarea = $("textarea").val() + msg + "\n";
+        $("textarea").val(newTextForTextarea);
+      });
+
+      $(function () {
+        // Code to execute when the DOM is ready
+        let oldChats = [
+          { message: "Helloooo", userName: "Ravikiran", time: "7:30:00AM" },
+          { message: "Hiiiiiii", userName: "Rahman", time: "7:31:00AM" },
+        ];
+        for (chat of oldChats) {
+          let { userName, message, time } = chat;
+          let msg = `${userName} : ${message} (${time})`;
+          let newTextForTextarea = $("textarea").val() + msg + "\n";
+          $("textarea").val(newTextForTextarea);
+        }
+
+        $("#setNameBtn").on("click", () => {
+          const userName = $("#userName").val();
+          socket.emit("setName", userName);
+          $("#userName").val("");
+          $("#userNameSpan").html(`Hello <b>${userName}</b> Enjoy Chatting!!!`);
+        });
+
+        $("#sendMsg").on("click", () => {
+          socket.emit("chat", { message: $("#chatText").val() });
+          $("#chatText").val("");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Simple Chat Application Using NodeJS + Socket.io</h1>
+
+    <p>
+      <input id="userName" placeholder="Enter Your Name..." />
+      <button id="setNameBtn">Set Name</button>
+      <span id="userNameSpan"></span>
+    </p>
+    <textarea style="width: 500px; height: 300px"></textarea>
+
+    <p>
+      <input id="chatText" placeholder="Enter Your Message Here..." />
+      <button id="sendMsg">Send Msg</button>
+    </p>
+  </body>
+</html>
