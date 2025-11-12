@@ -16,13 +16,17 @@ app.use(express.static("public"));
 const io = socket(server);
 
 const activeUsers = new Set();
+const activeUsersObj = {}
+
+
 
 io.on("connection", function (socket) {
-  console.log("Made socket connection");
-
+  console.log("Made socket connection", socket);
+  // socket = {a:10,b:20,userId:rahman}
   socket.on("new user", function (data) {
     socket.userId = data;
     activeUsers.add(data);
+    activeUsersObj[data] = socket;
     io.emit("new user", [...activeUsers]);
   });
 
@@ -33,6 +37,19 @@ io.on("connection", function (socket) {
 
   socket.on("chat message", function (data) {
     io.emit("chat message", data);
+  });
+
+  socket.on("private message", ({ message, receiver }) => {
+    console.log(message, receiver)
+    const receiverSocket = activeUsersObj[receiver];
+    if (receiverSocket) {
+      socket.to(receiverSocket).emit("private message", {
+        message,
+        nick: socket.id,
+      });
+    }else{
+      console.log('no socket found')
+    }
   });
 
   socket.on("typing", function (data) {
