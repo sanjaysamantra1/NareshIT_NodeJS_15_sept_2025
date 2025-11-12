@@ -104,6 +104,7 @@ socket.on("chat message", function (data) {
     addNewMessage({ user: data.nick, message: data.message });
 });
 socket.on("private message", function (data) {
+   console.log('private message..............')
     addNewMessage({ user: data.nick, message: data.message });
 });
 

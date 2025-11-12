@@ -15,13 +15,13 @@ app.use(express.static("public"));
 // Socket setup
 const io = socket(server);
 
-const activeUsers = new Set();
+const activeUsers = new Set(); 
 const activeUsersObj = {}
 
 
 
 io.on("connection", function (socket) {
-  console.log("Made socket connection", socket);
+  console.log("Made socket connection");
   // socket = {a:10,b:20,userId:rahman}
   socket.on("new user", function (data) {
     socket.userId = data;
@@ -40,8 +40,10 @@ io.on("connection", function (socket) {
   });
 
   socket.on("private message", ({ message, receiver }) => {
-    console.log(message, receiver)
     const receiverSocket = activeUsersObj[receiver];
+    console.log(Object.keys(activeUsersObj))
+    console.log(message, receiver, receiverSocket)
+    
     if (receiverSocket) {
       socket.to(receiverSocket).emit("private message", {
         message,
