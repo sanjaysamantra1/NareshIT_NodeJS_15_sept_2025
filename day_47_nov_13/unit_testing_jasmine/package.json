@@ -1,0 +1,16 @@
+{
+  "name": "unit_testing_jasmine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --exclude 'spec/**/*.js' jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^5.12.0",
+    "nyc": "^17.1.0"
+  }
+}
