@@ -22,7 +22,9 @@ Unit Testing with Jasmine
 Coverage Report
 ===============
 1. npm i nyc
-2. nyc npm run test
+2. Add below script in package.json
+  "test": "nyc --exclude 'spec/**/*.js' jasmine"
+  npm run test
 
  
 Jasmine Terminologies
@@ -52,10 +54,10 @@ toContain()
 Setup and Teardown
 Jasmine Global Functions
 ------------------------
-beforeAll()
-beforeEach()
-afterEach()
-afterAll()
+beforeAll()   // 1
+beforeEach()  // N
+afterEach()   // N
+afterAll()    // 1
 
 fdescribe() - focused describe. If it exists, jasmine will run only fdescribe spec and ignore other type of describe (describe and xdescribe).
 xdescribe() - disabled describe. It will never be executed.

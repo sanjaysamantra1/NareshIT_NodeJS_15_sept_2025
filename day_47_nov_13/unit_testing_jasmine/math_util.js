@@ -59,6 +59,11 @@ function countOccurrences(arr, element) {
     return arr.filter(item => item === element).length;
 }
 
+let cars = ['Tata', 'Honda'];
+function addNewCar(newCar) {
+    cars.push(newCar);
+}
+
 module.exports = {
     sumOfDigits,
     sum,
@@ -70,5 +75,7 @@ module.exports = {
     flattenArray,
     capitalize,
     isPalindrome,
-    countOccurrences
+    countOccurrences,
+    cars,
+    addNewCar
 };
