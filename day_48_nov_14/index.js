@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { employeeRouter } from "./src/routes/employee_routes.js";
 
+
 export const app = express();
 // middlewares
 app.use(express.json());
