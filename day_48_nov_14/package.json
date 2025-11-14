@@ -1,0 +1,28 @@
+{
+  "name": "day_48_nov_14",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js",
+    "test": "mocha test/**/*.js",
+    "test-report": "nyc mocha test/**/*.js",
+    "coverage": "nyc report --reporter=html && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3",
+    "nyc": "^17.1.0"
+  },
+  "devDependencies": {
+    "chai": "^6.2.1",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.5",
+    "sinon": "^21.0.0"
+  }
+}
